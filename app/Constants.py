@@ -4,25 +4,25 @@ Some contants to use
 import os
 import pathlib
 
-# This is the local directory where I make some test with fake websites
-TEST_DIR = "test/"
+ROOT_PATH = pathlib.Path(__file__).parents[1].absolute()
 
-# Differents local path to make some tests
-WORDPRESS_DIR = TEST_DIR + "wordpress/"
-JOOMLA_DIR = TEST_DIR + "joomla/"
-DRUPAL_DIR = TEST_DIR + "druptal/"
-MAGENTO_DIR = TEST_DIR + "magento/"
+# This is the local directory where I make some test with fake websites
+TEST_DIR = ROOT_PATH / "test"
+
+# Different local path to make some tests
+WORDPRESS_DIR = TEST_DIR / "wordpress"
+JOOMLA_DIR = TEST_DIR / "joomla"
+DRUPAL_DIR = TEST_DIR / "druptal"
+MAGENTO_DIR = TEST_DIR / "magento"
 
 # The dir where clean installations are downloaded and unzipped
-CACHE_DIR = "cache/"
+CACHE_DIR = ROOT_PATH / "cache"
 
 # The dir where backups are stored
-BACKUPS_DIR = "backups/"
+BACKUPS_DIR = ROOT_PATH / "backups"
 
 # Logs dir
-LOGS_DIR = "logs/"
-
-ROOT_PATH = pathlib.Path(__file__).parent.absolute()
+LOGS_DIR = ROOT_PATH / "logs"
 
 # The dir to get_links and load_links
 OUTPUT_FILE = ROOT_PATH.joinpath("output.txt")

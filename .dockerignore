@@ -1,0 +1,17 @@
+# Ignore all
+**
+
+# Add what we need.
+!dicts
+!signatures
+
+entrypoint.sh
+
+!app
+
+!masc.conf
+!masc.py
+
+
+!requirements.txt
+!setup.py

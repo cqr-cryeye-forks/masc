@@ -128,3 +128,5 @@ ENV/
 output.txt
 res.json
 check_result
+
+compose.override.yaml

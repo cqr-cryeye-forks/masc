@@ -303,10 +303,14 @@ class CMS(ABC):
         return results
 
     def set_log(self):
-        date = datetime.datetime.now().strftime("%Y%m%d-%H%M")
         if not os.path.isdir(LOGS_DIR):
             os.mkdir(LOGS_DIR)
-        logging.basicConfig(filename=LOGS_DIR + self.type + "-" + self.name + "-" + date + ".log", level=logging.INFO)
+        # logs_filename = self.type + "-" + self.name + "-" + date + ".log"
+
+        date = datetime.datetime.now().strftime("%Y%m%d-%H%M")
+        logs_filename = f"{self.type}-{self.name}-{date}.log"
+
+        logging.basicConfig(filename=LOGS_DIR / logs_filename , level=logging.INFO)
 
     def on_modified(self, event):
         """Notify on the screen changes during monitoring"""

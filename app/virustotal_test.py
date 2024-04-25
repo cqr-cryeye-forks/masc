@@ -8,7 +8,7 @@ DIR = '/var/www/hacked/wordpress/classic/'
 APIKEY = os.environ.get('APIKEY_VIRUSTOTAL')
 
 params = {'apikey': APIKEY}
-files = {'file': ('setup.py', open('setup.py'), 'rb')}
+files = {'file': ('setup.py', open('../setup.py'), 'rb')}
 response = requests.post('https://www.virustotal.com/vtapi/v2/file/scan', files=files, params=params)
 json_response = response.json()
 print(json_response)

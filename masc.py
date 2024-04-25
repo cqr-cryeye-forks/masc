@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+import logging
+import sys
+
+sys.path.append('./app')
+
 import json
 import os
 import pathlib
@@ -7,16 +12,16 @@ import sys
 from progress.spinner import Spinner
 from termcolor import colored
 
-from Constants import LOGS_DIR, PATH_TO_CONTENT_FOLDER, result_dict
-from Custom import Custom
-from Dictionary import Dictionary
-from Drupal import Drupal
-from MascUtils import MascUtils, BACKUPS_DIR
-from PrintUtils import print_green, print_blue, print_red, print_info, print_results
-from Wordpress import Wordpress
-from args import init_args
-from get_links import get_links
-from load_links import load_links
+from app.Constants import LOGS_DIR, PATH_TO_CONTENT_FOLDER, result_dict
+from app.Custom import Custom
+from app.Dictionary import Dictionary
+from app.Drupal import Drupal
+from app.MascUtils import MascUtils, BACKUPS_DIR
+from app.PrintUtils import print_green, print_blue, print_red, print_info, print_results
+from app.Wordpress import Wordpress
+from app.args import init_args
+from app.get_links import get_links
+from app.load_links import load_links
 
 
 def main():
@@ -69,7 +74,9 @@ def main():
             elif args.site_type == 'custom':
                 cms = Custom(args.path, name)
         except Exception as e:
-            print_red(e)
+            logger = logging.getLogger()
+            logger.exception("Exception")
+
             print_blue("Exiting . . .")
             return
 

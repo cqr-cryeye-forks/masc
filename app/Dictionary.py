@@ -1,19 +1,23 @@
 import json
 import os
 
+# noinspection PyPackageRequirements
 import yara
+
 from progress.bar import Bar
 from termcolor import colored
 
 from PrintUtils import print_red, print_blue
+from app.Constants import ROOT_PATH
 
-DICTS_PATH = "dicts/"
-SIGNATURES_PATH = "signatures/"
+DICTS_PATH = ROOT_PATH / "dicts"
+SIGNATURES_PATH = ROOT_PATH / "signatures"
 
-SUSPECT_FILES_DATA = "_suspect_files.data"
-SUSPECT_CONTENT_DATA = "_suspect_content.data"
-CHECKSUM_PATH = SIGNATURES_PATH + "checksum/"
-RULES_PATH = SIGNATURES_PATH + "rules/"
+SUSPECT_FILES_DATA__NAME_PART = "_suspect_files.data"
+SUSPECT_CONTENT_DATA__NAME_PART = "_suspect_content.data"
+
+CHECKSUM_PATH = SIGNATURES_PATH / "checksum"
+RULES_PATH = SIGNATURES_PATH / "rules"
 
 
 class Dictionary:
@@ -26,7 +30,7 @@ class Dictionary:
     @classmethod
     def load_suspect_files(cls, type, path):
         """Return suspect files for an specified type of installation: wordpress, joomla . . ."""
-        with open(os.path.join(DICTS_PATH, type + SUSPECT_FILES_DATA)) as file:
+        with open(DICTS_PATH / f"{type}{SUSPECT_CONTENT_DATA__NAME_PART}") as file:
             for line in file:
                 if line.startswith("#"):
                     continue
@@ -34,7 +38,7 @@ class Dictionary:
 
     @classmethod
     def load_suspect_content(cls, type, path):
-        with open(os.path.join(DICTS_PATH, type + SUSPECT_CONTENT_DATA)) as file:
+        with open(DICTS_PATH / f"{type}{SUSPECT_CONTENT_DATA__NAME_PART}") as file:
             for line in file:
                 if line.startswith("#"):
                     continue
@@ -92,11 +96,11 @@ class Dictionary:
     @staticmethod
     def add_suspect_file(type, filename):
         """Add a suspect file to the masc dictionary"""
-        with open(os.path.join(DICTS_PATH, type + SUSPECT_FILES_DATA), "a+") as file:
+        with open(DICTS_PATH / f"{type}{SUSPECT_FILES_DATA__NAME_PART}", "a+") as file:
             file.write(filename + "\n")
 
     @staticmethod
     def add_suspect_content(type, content):
         """Add a suspect content to the masc dictionary"""
-        with open(os.path.join(DICTS_PATH, type + SUSPECT_CONTENT_DATA), "a+") as file:
+        with open(DICTS_PATH / f"{type}{SUSPECT_FILES_DATA__NAME_PART}", "a+") as file:
             file.write(content + "\n")

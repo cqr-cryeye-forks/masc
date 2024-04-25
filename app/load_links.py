@@ -2,11 +2,11 @@ import os
 
 import requests
 
-from Constants import PATH_TO_CONTENT_FOLDER
+from Constants import PATH_TO_CONTENT_FOLDER, OUTPUT_FILE
 
 
 def load_links():
-    with open("output.txt", 'r') as f:
+    with open(OUTPUT_FILE, 'r') as f:
         links = f.readlines()
 
     counter = 0

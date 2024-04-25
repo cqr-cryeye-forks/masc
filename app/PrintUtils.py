@@ -1,6 +1,6 @@
 from termcolor import colored
 
-from Constants import result_dict
+from app.Constants import result_dict
 
 """
 Some utility methods to print information on the screen

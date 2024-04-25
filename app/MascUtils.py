@@ -2,7 +2,7 @@ import datetime
 import os
 import shutil
 
-from Constants import CACHE_DIR, LOGS_DIR, BACKUPS_DIR
+from app.Constants import CACHE_DIR, LOGS_DIR, BACKUPS_DIR
 
 
 class MascUtils:
