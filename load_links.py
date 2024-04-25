@@ -13,7 +13,7 @@ def load_links():
         if not link.startswith('http'):
             continue
 
-        resource_response = requests.get(link)
+        resource_response = requests.get(link, verify=False)
         print(link)
 
         filename = os.path.join(PATH_TO_CONTENT_FOLDER, os.path.basename(link))
