@@ -28,7 +28,7 @@ def main():
 
     if len(sys.argv) == 1:
         print("No arguments provided. Execute '" + sys.argv[0] + " -h' for help")
-        exit()
+        return
 
     args = init_args()
 
@@ -44,16 +44,16 @@ def main():
 
         if not args.path:
             print_red("You must specify the installation path to perform a scan")
-            exit()
+            return
 
         if not args.site_type:
             print_red("You must specify the installation type to perform a scan")
-            exit()
+            return
 
         if args.clean_site and not args.name:
             print_red("You selected clean up your website, but no name was provided. " +
                       "You must choose a name if you want to clean up your site")
-            exit()
+            return
 
         # Set a default or choosen name
         name = 'no_name'
@@ -71,7 +71,7 @@ def main():
         except Exception as e:
             print_red(e)
             print_blue("Exiting . . .")
-            exit()
+            return
 
         # Load dictionaries/signatures/rules from databases
         print_blue("Loading dictionaries and signatures. . . ")
@@ -89,7 +89,7 @@ def main():
         print_blue("Making a backup . . .")
         if not cms.make_backup():
             print_red("An error has occured while making backup. Aborting . . .")
-            exit()
+            return
         print_green("Done.")
 
         # TODO: attention! In Natrix we use only 'custom' type, so i make saving output only to it.
@@ -107,7 +107,7 @@ def main():
                 output_file.write_text(json_data)
                 print(f"Final results save to {output_file.absolute().as_uri()}")
 
-            exit()
+            return
 
         # Compare malware and suspect files with clean installation files
         print_blue("Let's search for malware and suspect files. Then, let's compare results with a clean installation")
@@ -122,7 +122,7 @@ def main():
                     "Malware/suspect files were found. They will be removed if you include the option --clean-site")
                 for filename in files_to_remove:
                     print("\t" + os.path.join(cms.path, filename))
-            exit()
+            return
 
         # The user chose clean up the site
         if args.clean_site:
@@ -162,15 +162,15 @@ def main():
 
         if not args.path:
             print_red("You must provide the path of your website to make a backup")
-            exit()
+            return
 
         if not args.site_type:
             print_red("You must provide the type-site option to make a backup")
-            exit
+            return
 
         if not args.name:
             print_red("You must provide the name of your installation to make a backup")
-            exit()
+            return
 
         # Check if it's exists a previous backup of the same website for the same date
         backups_list = os.scandir(BACKUPS_DIR)
@@ -190,7 +190,7 @@ def main():
             user_input = input('')
             if user_input != 'm':
                 print_red('Aborted by user.')
-                exit()
+                return
 
         print_blue("Making backup . . .")
         website = Custom(args.path, args.name, args.site_type)
@@ -201,15 +201,15 @@ def main():
     elif args.rollback:
         if not args.path:
             print_red("You must provide the path of your website to rollback")
-            exit()
+            return
 
         if not args.site_type:
             print_red("You must provide the type-site option to rollback")
-            exit
+            return
 
         if not args.name:
             print_red("You must provide the name of your installation to rollback")
-            exit()
+            return
 
         print_blue("Restoring backup . . .")
         website = Custom(args.path, args.name, args.site_type)
@@ -226,15 +226,15 @@ def main():
     elif args.monitor:
         if not args.path:
             print_red("You must provide the path of your website to monitor it")
-            exit()
+            return
 
         if not args.site_type:
             print_red("You must provide the type-site option to monitor it")
-            exit()
+            return
 
         if not args.name:
             print_red("You must provide the name of your installation to monitor it")
-            exit()
+            return
 
         print_blue("Monitoring website . . .(Press CTRL+C to terminate)")
         website = Custom(args.path, args.name, args.site_type, False)
@@ -244,14 +244,14 @@ def main():
     elif args.add_file:
         if not args.site_type:
             print_red("You must specify the site_type to add a new suspect file")
-            exit()
+            return
 
         Dictionary.add_suspect_file(args.site_type, args.add_file)
         print_blue("Added '" + args.add_file + "' as a suspect file to the " + args.site_type + " dictionary")
     elif args.add_word:
         if not args.site_type:
             print_red("Yoy must specify the site_type to add a new suspect content")
-            exit()
+            return
 
         Dictionary.add_suspect_content(args.site_type, args.add_word)
         print_blue("Added '" + args.add_word + "' as a suspect word to the " + args.site_type + " dictionary")
