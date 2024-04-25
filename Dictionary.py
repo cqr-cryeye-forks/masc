@@ -46,8 +46,8 @@ class Dictionary:
         errors = False
 
         signatures_count = len(list(os.scandir(CHECKSUM_PATH)))
-        # bar = Bar(colored("Loading malware signature files", "blue"), fill=colored("#", "blue"),
-        #           max=signatures_count, suffix='%(percent)d%%')
+        bar = Bar(colored("Loading malware signature files", "blue"), fill=colored("#", "blue"),
+                  max=signatures_count, suffix='%(percent)d%%')
         # Load malware signatures
         for entry in os.scandir(CHECKSUM_PATH):
             file_data = open(entry.path).read()
@@ -56,14 +56,14 @@ class Dictionary:
             for signature_hash in signatures["Database_Hash"]:
                 cls.signatures_db[signature_hash["Malware_Hash"]] = signature_hash["Malware_Name"]
 
-#             bar.next()
+            bar.next()
 
-#         bar.finish()
+        bar.finish()
         print_blue("Loaded " + str(len(cls.signatures_db)) + " malware signatures")
 
         rules_count = len(list(os.scandir(RULES_PATH)))
-#         bar = Bar(colored("Loading YARA rules . . .", "blue"), fill=colored("#", "blue"),
-#                   max=rules_count, suffix='%(percent)d%%')
+        bar = Bar(colored("Loading YARA rules . . .", "blue"), fill=colored("#", "blue"),
+                  max=rules_count, suffix='%(percent)d%%')
         # Load YARA rules
         for entry in os.scandir(RULES_PATH):
             try:
@@ -73,9 +73,9 @@ class Dictionary:
                 # print(e)
                 errors = True
 
-#             bar.next()
+            bar.next()
 
-#         bar.finish()
+        bar.finish()
         if errors:
             print_red("Some errors while reading yara rules. Some rules were not loaded")
 
