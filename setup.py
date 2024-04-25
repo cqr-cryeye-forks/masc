@@ -1,5 +1,5 @@
 from distutils.core import setup
-from pypandoc.pandoc_download import download_pandoc
+
 import pypandoc
 
 # generate README.txt from README.md

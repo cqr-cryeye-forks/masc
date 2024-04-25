@@ -1,9 +1,11 @@
 import os
+
 from CMS import CMS
 
 
 class Drupal(CMS):
     """This class represents a Drupal installation"""
+
     def __init__(self, path, name, log=True):
         super().__init__(path, name, log)
 
@@ -32,9 +34,3 @@ class Drupal(CMS):
 
         # Generic cleaning for every CMS
         self.delete_known_files()
-
-
-
-
-
-

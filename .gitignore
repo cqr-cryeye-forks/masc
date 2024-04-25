@@ -125,3 +125,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+output.txt
+res.json
+check_result

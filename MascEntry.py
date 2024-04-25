@@ -1,9 +1,11 @@
-import magic
 import re
+
+import magic
 
 
 class MascEntry:
     """A filesystem entry: file or directory with some information"""
+
     # Apparently 'st_creator' and 'st_type' are only available in some Unix (like Unix)
     # so, by now, I put 'file' or 'dir' manually checking the type of the entry
     def __init__(self, name, path, absolute_path, size, mode, atime, mtime, ctime, st_type, creator=""):

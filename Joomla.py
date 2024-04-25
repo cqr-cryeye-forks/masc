@@ -3,6 +3,7 @@ from CMS import CMS
 
 class Joomla(CMS):
     """This class represents a Joomla installation"""
+
     def __init__(self, path, name):
         super().__init__(path, name)
 
@@ -17,5 +18,3 @@ class Joomla(CMS):
 
     def cleanup_site(self):
         pass
-
-

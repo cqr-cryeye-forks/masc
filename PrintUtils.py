@@ -1,5 +1,7 @@
 from termcolor import colored
 
+from Constants import result_dict
+
 """
 Some utility methods to print information on the screen
 """
@@ -40,14 +42,20 @@ def print_debug(message, extra=None):
         print(colored("[DEBUG] " + message, "yellow"))
 
 
-def print_results(results, data_found_message, data_not_found_message):
-
+def print_results(results):
     if len(results) == 0:
-        print_green(data_not_found_message)
+        print_green("Congratulations! No malware were found")
+        result_dict["message"] = "Congratulations! No malware were found"
     else:
-        print_red(data_found_message)
+        print_red("Malware were found. Listing files . . .")
+        result_dict["message"] = "Malware were found."
+
+        if 'paths' not in result_dict:
+            result_dict["paths"] = []
+
         for result in results:
             print("\t" + result["entry"].path + ": " + result["details"])
+            result_dict["paths"].append({"path": result["entry"].path + ": " + result["details"]})
 
 
 def print_info():

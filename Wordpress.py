@@ -5,6 +5,7 @@ from CMS import CMS
 
 class Wordpress(CMS):
     """This class represents a WordPress installation"""
+
     def __init__(self, path, name, log=True):
 
         super().__init__(path, name, log)

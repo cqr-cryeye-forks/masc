@@ -1,6 +1,6 @@
-import shutil
-import os
 import datetime
+import os
+import shutil
 
 from Constants import CACHE_DIR, LOGS_DIR, BACKUPS_DIR
 

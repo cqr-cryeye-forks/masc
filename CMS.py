@@ -1,30 +1,31 @@
-import os
-import zipfile
-import hashlib
-import shutil
-import datetime
-import logging
-import time
-import pyclamd
 import configparser
-import urllib.request
+import datetime
 import fnmatch
-
-from progress.bar import Bar
-from watchdog.observers import Observer
-from watchdog.events import LoggingEventHandler, FileSystemEventHandler
+import hashlib
+import logging
+import os
+import shutil
+import time
+import urllib.request
+import zipfile
 from abc import ABC, abstractmethod
-from termcolor import colored
-from progress.spinner import Spinner
 
-from MascEntry import MascEntry
-from Dictionary import Dictionary
-from PrintUtils import print_red, print_blue, print_green
+import pyclamd
+from progress.bar import Bar
+from progress.spinner import Spinner
+from termcolor import colored
+from watchdog.events import LoggingEventHandler, FileSystemEventHandler
+from watchdog.observers import Observer
+
 from Constants import BACKUPS_DIR, CACHE_DIR, LOGS_DIR
+from Dictionary import Dictionary
+from MascEntry import MascEntry
+from PrintUtils import print_red, print_blue, print_green
 
 
 class CMS(ABC):
     """This class represent a generic website"""
+
     def __init__(self, path, name="no_name", log=True):
         super().__init__()
 
@@ -158,10 +159,10 @@ class CMS(ABC):
         try:
             # Remove previous backup
             if os.path.isdir(destination_dir):
-                answer = input("A previous backups exists. Do you want to overwrite it? [y|N] ")
-                if answer == '' or answer.lower() == 'n':
-                    print_blue("Operation cancelled by user")
-                    exit()
+                # answer = input("A previous backups exists. Do you want to overwrite it? [y|N] ")
+                # if answer == '' or answer.lower() == 'n':
+                #     print_blue("Operation cancelled by user")
+                #     exit()
 
                 shutil.rmtree(destination_dir)
 
